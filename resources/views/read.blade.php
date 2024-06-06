@@ -10,7 +10,8 @@
 
     <section id="read">
         <div class="container ">
-            <div class="row justify-content-center mt-5">
+          <a href="{{ route('jabatan.create') }}" class="btn btn-primary mt-5">Buat Jabatan Baru</a>
+            <div class="row justify-content-center mt-2">
                 <div class="col">
 
                 
