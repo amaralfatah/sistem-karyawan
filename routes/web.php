@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\JabatanController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [JabatanController::class,'index'])->name('jabatan.read');
