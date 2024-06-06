@@ -9,9 +9,9 @@
   <body>
 
     <section id="read">
-        <div class="container m-5">
-            <div class="row justify-content-center">
-                <div class="col-10">
+        <div class="container ">
+            <div class="row justify-content-center mt-5">
+                <div class="col">
 
                 
         <table class="table">
@@ -24,6 +24,7 @@
                 <th scope="col">Gaji Pokok</th>
                 <th scope="col">Tunjangan</th>
                 <th scope="col">Potongan</th>
+                <th scope="col">Opsi</th>
                 </tr>
             </thead>
             <tbody>
@@ -37,6 +38,12 @@
                 <td>{{ $items->gaji_pokok }}</td>
                 <td>{{ $items->tunjangan }}</td>
                 <td>{{ $items->potongan }}</td>
+                <td><a href="{{ route('jabatan.edit', ['id' => $items->id]) }}" class="btn btn-warning"> Edit </a> | <form action="{{ route('jabatan.delete', ['id' => $items->id]) }}" method="POST">
+                      @csrf
+                      @method('DELETE')
+                      <button type="submit" class="btn btn-danger">Delete</button>
+                  </form>
+                  </td>
                 </tr>
                 @endforeach
 

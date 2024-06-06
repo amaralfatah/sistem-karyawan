@@ -54,9 +54,10 @@ class JabatanController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Jabatan $jabatan)
+    public function edit(Request $request, $id)
     {
-        
+        $data = Jabatan::find($id);
+        return view('edit',compact('data'));
     }
 
     /**
@@ -65,14 +66,15 @@ class JabatanController extends Controller
     public function update(Request $request, $id)
     {
         $data = Jabatan::find($id);
+        $data->update($request->all());
+        return redirect()->route('jabatan.read')->with('success', 'Jabatan berhasil di Update');
 
-        Jabatan::update($data->all());
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Jabatan $jabatan,$id)
+    public function destroy(Request $request, $id)
     {
         Jabatan::destroy($id);
         return redirect()->route('jabatan.read')->with('success', 'Jabatan berhasil dihapus');
