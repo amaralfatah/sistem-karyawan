@@ -13,7 +13,7 @@ class JabatanController extends Controller
     public function index()
     {
         $data = Jabatan::all();
-        return view('read', compact('data'));
+        return view('jabatan/read', compact('data'));
     }
 
     /**
@@ -21,7 +21,7 @@ class JabatanController extends Controller
      */
     public function create()
     {
-        return view('create');
+        return view('jabatan/create');
     }
 
     /**
@@ -57,7 +57,7 @@ class JabatanController extends Controller
     public function edit(Request $request, $id)
     {
         $data = Jabatan::find($id);
-        return view('edit',compact('data'));
+        return view('jabatan/edit',compact('data'));
     }
 
     /**

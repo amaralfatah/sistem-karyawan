@@ -17,4 +17,9 @@ class Jabatan extends Model
         'tunjangan',
         'potongan',
     ];
+
+    //  Relasi ke karyawans
+    // public function karyawans(){
+    //     return $this->belongsTo(karyawans::class);
+    // }
 }
