@@ -13,7 +13,6 @@ Route::get('/edit/{id}', [JabatanController::class,'edit'])->name('jabatan.edit'
 Route::put('/edit-proses/{id}', [JabatanController::class,'update'])->name('jabatan.update');
 Route::delete('/delete/{id}', [JabatanController::class,'destroy'])->name('jabatan.delete');
 Route::get('/search', [JabatanController::class,'search'])->name('jabatan.search');
-Route::get('/sorting', [JabatanController::class,'sorting'])->name('jabatan.sorting');
 
 //route cuti
 Route::get('/cuti', [CutiController::class,'index'])->name('cuti.read');
