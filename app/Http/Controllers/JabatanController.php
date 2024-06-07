@@ -12,6 +12,7 @@ class JabatanController extends Controller
      */
     public function index()
     {
+        session()->forget('jabatan');
         $data = Jabatan::all();
         return view('jabatan/read', compact('data'));
     }
@@ -78,5 +79,16 @@ class JabatanController extends Controller
     {
         Jabatan::destroy($id);
         return redirect()->route('jabatan.read')->with('success', 'Jabatan berhasil dihapus');
+    }
+
+    public function search(Request $request){
+            $data = Jabatan::where('nama_jabatan', 'like', $request->jabatan.'%')->orderBy('id', $request->urutan )->get();
+            session(['jabatan' => $request->jabatan]);
+            return view('jabatan.read',compact('data'));
+    }
+
+    public function sorting(Request $request){
+        $data = Jabatan::orderBy('id', $request->urutan )->get();
+        return view('jabatan.read',compact('data'));
     }
 }

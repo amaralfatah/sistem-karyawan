@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Jabatan | BackEnd</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   </head>
   <body>
     <section id="nav">
@@ -30,7 +31,30 @@
 
     <section id="read">
         <div class="container ">
-          <a href="{{ route('jabatan.create') }}" class="btn btn-primary mt-5">Buat Jabatan Baru</a>
+          <div id="menu-sorting-jabatan" class="">
+            <a href="{{ route('jabatan.create') }}" class="btn btn-primary mt-5 m-3">Buat Jabatan Baru</a>
+            <div id="search-jabatan" class="ms-3 me-3 d-flex">
+                <form action="{{ route('jabatan.search') }}" class="d-flex w-50">
+                    <div class="input-group">
+                        <span class="input-group-text bg-white" id="basic-addon1"><i class="bi bi-search"></i></span>
+                        <input type="text" class="form-control" name="jabatan" 
+                        @if (session()->has('jabatan'))
+                          value=" {{ session('jabatan') }} " 
+                        @else
+                        value=""
+                        @endif
+                        placeholder="Cari Jabatan"  aria-describedby="basic-addon1">
+                    </div>
+                    <button type="submit" class="btn btn-secondary fw-medium ms-2">Cari</button>
+                    <select class="form-select w-50 ms-3" name="urutan" aria-label="Default select example">
+                      <option selected value="asc">Urutkan</option>
+                      <option value="asc">Teratas</option>
+                      <option value="desc">Terbawah</option>
+                    </select>
+                </form>
+          </div>
+            </div>
+            
             <div class="row justify-content-center mt-2">
                 <div class="col">
 

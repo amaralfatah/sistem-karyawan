@@ -20,7 +20,7 @@
           <a class="nav-link active" aria-current="page" href="{{ route('jabatan.read') }}">Jabatan</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Cuti</a>
+          <a class="nav-link" href="{{ route('cuti.read') }}">Cuti</a>
         </li>
       </ul>
     </div>
