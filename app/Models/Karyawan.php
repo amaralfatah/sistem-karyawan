@@ -22,10 +22,10 @@ class Karyawan extends Model
     ];
 
     // Relasi dengan Jabatan
-    // public function jabatan()
-    // {
-    //     return $this->belongsTo(Jabatan::class);
-    // }
+    public function jabatan()
+    {
+        return $this->belongsTo(Jabatan::class);
+    }
 
     // Relasi dengan Absensi~
     // public function absensis()

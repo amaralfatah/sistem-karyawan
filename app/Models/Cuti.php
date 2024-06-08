@@ -10,7 +10,7 @@ class Cuti extends Model
     use HasFactory;
 
     protected $fillable = [
-        // 'karyawan_id',
+        'karyawan_id',
         'tanggal_mulai',
         'tanggal_berakhir',
         'keterangan',
@@ -18,7 +18,7 @@ class Cuti extends Model
     ];
 
     // Relasi ke karyawans
-    // public function karyawans(){
-    //     return $this->hasMany(karyawans::class);
-    // }
+    public function karyawans(){
+        return $this->hasMany(Karyawan::class);
+    }
 }

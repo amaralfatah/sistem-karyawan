@@ -19,7 +19,7 @@ class Jabatan extends Model
     ];
 
     //  Relasi ke karyawans
-    // public function karyawans(){
-    //     return $this->belongsTo(karyawans::class);
-    // }
+    public function karyawans(){
+        return $this->belongsTo(Karyawan::class);
+    }
 }

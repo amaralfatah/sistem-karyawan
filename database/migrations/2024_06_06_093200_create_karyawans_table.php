@@ -15,7 +15,7 @@ return new class extends Migration
             $table->string('jenis_kelamin');
             $table->string('telephone');
             $table->string('status');
-            // $table->foreignId('jabatan_id')->constrained('jabatans');
+            $table->foreignId('jabatan_id')->constrained('jabatans');
             $table->string('ktp');
             $table->string('NPWP');
             $table->integer('total_kontak');
