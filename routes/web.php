@@ -21,3 +21,5 @@ Route::post('/cuti/create-proses', [CutiController::class,'store'])->name('cuti.
 Route::get('/cuti/edit/{id}', [CutiController::class,'edit'])->name('cuti.edit');
 Route::put('/cuti/edit-proses/{id}', [CutiController::class,'update'])->name('cuti.update');
 Route::delete('/cuti/delete/{id}', [CutiController::class,'destroy'])->name('cuti.delete');
+
+//route absensi

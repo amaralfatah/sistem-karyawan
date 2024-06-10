@@ -3,61 +3,62 @@
 namespace App\Http\Controllers;
 
 use App\Models\Absensi;
+use App\Models\Karyawan;
 use Illuminate\Http\Request;
 
 class AbsensiController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        //
+        $absensi = Absensi::all();
+        $karyawan = Karyawan::all();
+
+        return view('absensi.index', compact('absensi', 'karyawan'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
-        //
+        $karyawan = Karyawan::all();
+
+        return view('absensi.create', compact('karyawan'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(Request $request)
     {
-        //
+        $validateData = $request->validate([
+            'id_karyawan' => 'required',
+            'status_absen' => 'required',
+            'keterangan' => 'required',
+            'tanggal_absensi' => 'required',
+        ]);
+
+        Absensi::create($validateData);
+
+        return redirect()->route('absensi.index')->with('success', 'Data Absensi Berhasil dibuat');
     }
 
-    /**
-     * Display the specified resource.
-     */
+
     public function show(Absensi $absensi)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
     public function edit(Absensi $absensi)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(Request $request, Absensi $absensi)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(Absensi $absensi)
     {
         //
