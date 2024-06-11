@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Absensi;
 use App\Models\Karyawan;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class AbsensiController extends Controller
@@ -14,7 +15,7 @@ class AbsensiController extends Controller
         $absensi = Absensi::all();
         $karyawan = Karyawan::all();
 
-        return view('absensi.index', compact('absensi', 'karyawan'));
+        return view('absensi.read', compact('absensi', 'karyawan'));
     }
 
 
@@ -28,12 +29,25 @@ class AbsensiController extends Controller
 
     public function store(Request $request)
     {
+        $currentTime = Carbon::now('Asia/Jakarta');
+        $deadline = Carbon::today('Asia/Jakarta')->setHour(8)->setMinute(0)->setSecond(0);
+
+        // dd($currentTime);
+        // dd($deadline);
+
         $validateData = $request->validate([
             'id_karyawan' => 'required|string',
             'status_absen' => 'required|string',
-            'keterangan' => 'required|string',
-            'tanggal_absensi' => 'required',
+            'keterangan' => 'nullable',
+            'tanggal_absensi' => $currentTime->toDateString(),
+            'time' => $currentTime->toTimeString(),
         ]);
+
+        // $validateData['tanggal_absensi'] = $currentTime;
+
+        if ($currentTime->greaterThan($deadline)) {
+            return 'failed';
+        }
 
         Absensi::create($validateData);
 
@@ -65,8 +79,8 @@ class AbsensiController extends Controller
         $validateData = $request->validate([
             'id_karyawan' => 'required|string',
             'status_absen' => 'required|string',
-            'keterangan' => 'required|string',
-            'tanggal_absensi' => 'required',
+            'keterangan' => 'nullable',
+            'tanggal_absensi' => 'required|date',
         ]);
 
         $absensi->update($validateData);
@@ -82,5 +96,15 @@ class AbsensiController extends Controller
         $absensi->delete();
 
         return redirect()->route('absensi.index')->with('Data Absensi berhasil dihapus');
+    }
+
+
+    public function hideAttendance()
+    {
+        $currentTime = Carbon::now();
+
+        $deadline = Carbon::today('Asia/Jakarta')->hour('8')->minute('0')->second('0');
+
+        
     }
 }

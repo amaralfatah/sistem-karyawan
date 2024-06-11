@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AbsensiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\CutiController;
@@ -23,3 +24,5 @@ Route::put('/cuti/edit-proses/{id}', [CutiController::class,'update'])->name('cu
 Route::delete('/cuti/delete/{id}', [CutiController::class,'destroy'])->name('cuti.delete');
 
 //route absensi
+Route::post('/absensi', [AbsensiController::class, 'store'])->name('absensi.createProses');
+Route::get('/index/absensi', [AbsensiController::class, 'index'])->name('absensi.read');
