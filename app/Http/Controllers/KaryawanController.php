@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Jabatan;
 use App\Models\Karyawan;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,8 @@ class KaryawanController extends Controller
 
     public function create()
     {
-        return view('karyawans.create');
+        $jabatans = Jabatan::all();
+        return view('karyawans.create', compact('jabatans'));
     }
 
     public function store(Request $request)
@@ -36,16 +38,11 @@ class KaryawanController extends Controller
         return redirect()->route('karyawans.index')->with('success', 'Data Karyawan berhasil dibuat.');
     }
 
-    public function show($id)
-    {
-        $karyawan = Karyawan::findOrFail($id);
-        return view('karyawans.show', compact('karyawan'));
-    }
-
     public function edit($id)
     {
         $karyawan = Karyawan::findOrFail($id);
-        return view('karyawans.edit', compact('karyawan'));
+        $jabatans = Jabatan::all();
+        return view('karyawans.edit', compact('karyawan', 'jabatans'));
     }
 
     public function update(Request $request, $id)
@@ -66,6 +63,13 @@ class KaryawanController extends Controller
 
         $karyawan->update($validatedData);
         return redirect()->route('karyawans.index')->with('success', 'Data Karyawan berhasil diubah.');
+    }
+
+
+    public function show($id)
+    {
+        $karyawan = Karyawan::findOrFail($id);
+        return view('karyawans.show', compact('karyawan'));
     }
 
     public function destroy($id)
