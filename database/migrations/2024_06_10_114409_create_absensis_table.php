@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('absensis', function (Blueprint $table) {
             $table->id();
             $table->foreignId('karyawan_id')->constrained('karyawans');
-            $table->string('status_absen');
+            $table->enum('status', ['hadir', 'alpha']);
             $table->string('keterangan')->nullable();
             $table->date('tanggal_absensi');
-            $table->time('time');
+            $table->time('jam');
             $table->timestamps();
         });
     }

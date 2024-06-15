@@ -21,9 +21,9 @@ class AbsensiController extends Controller
 
     public function create()
     {
-        $karyawan = Karyawan::all();
+        // $karyawan = Karyawan::all();
 
-        return view('absensi.create', compact('karyawan'));
+        // return view('absensi.create', compact('karyawan'));
     }
 
 
@@ -36,14 +36,12 @@ class AbsensiController extends Controller
         // dd($deadline);
 
         $validateData = $request->validate([
-            'id_karyawan' => 'required|string',
-            'status_absen' => 'required|string',
+            'id_karyawan' => 'required',
+            'status' => 'required|in:hadir,alpha',
             'keterangan' => 'nullable',
             'tanggal_absensi' => $currentTime->toDateString(),
-            'time' => $currentTime->toTimeString(),
+            'jam' => $currentTime->toTimeString(),
         ]);
-
-        // $validateData['tanggal_absensi'] = $currentTime;
 
         if ($currentTime->greaterThan($deadline)) {
             return 'failed';
@@ -51,60 +49,64 @@ class AbsensiController extends Controller
 
         Absensi::create($validateData);
 
-        return redirect()->route('absensi.index')->with('success', 'Data Absensi Berhasil dibuat');
+        if ($validateData['status'] == 'hadir') {
+            //redirect ke halaman data hadir
+            return redirect()->route('absensiHadir.index')->with('success', 'Data Absensi Berhasil dibuat');
+        } else if ($validateData['status'] == 'alpha') {
+            //redirect ke halaman data alpha
+            return redirect()->route('absensiAlpha.index')->with('success', 'Data Absensi Berhasil dibuat');
+        }
     }
 
 
     public function show(Absensi $absensi, $id)
     {
-        $absensi = $absensi::findOrFail($id);
+        // $absensi = $absensi::findOrFail($id);
 
-        return view('absensi.show', compact('absensi'));
+        // return view('absensi.show', compact('absensi'));
     }
 
 
     public function edit(Absensi $absensi, $id)
     {
-        $absensi = Absensi::findOrFail($id);
-        $karyawan = Karyawan::all();
+        // $absensi = Absensi::findOrFail($id);
+        // $karyawan = Karyawan::all();
 
-        return view('edit.absensi', compact('absensi', 'karyawan'));
+        // return view('edit.absensi', compact('absensi', 'karyawan'));
     }
 
 
     public function update(Request $request, Absensi $absensi, $id)
     {
-        $absensi = $absensi::findOrFail($id);
+        // $absensi = $absensi::findOrFail($id);
 
-        $validateData = $request->validate([
-            'id_karyawan' => 'required|string',
-            'status_absen' => 'required|string',
-            'keterangan' => 'nullable',
-            'tanggal_absensi' => 'required|date',
-        ]);
+        // $validateData = $request->validate([
+        //     'id_karyawan' => 'required|string',
+        //     'status_absen' => 'required|string',
+        //     'keterangan' => 'nullable',
+        //     'tanggal_absensi' => 'required|date',
+        // ]);
 
-        $absensi->update($validateData);
+        // $absensi->update($validateData);
 
-        return redirect()->route('absensi.index')->with('Data Absensi berhasil diubah');
+        // return redirect()->route('absensi.index')->with('Data Absensi berhasil diubah');
     }
 
 
     public function destroy(Absensi $absensi, $id)
     {
-        $absensi = $absensi::findOrFail($id);
+        // $absensi = $absensi::findOrFail($id);
 
-        $absensi->delete();
+        // $absensi->delete();
 
-        return redirect()->route('absensi.index')->with('Data Absensi berhasil dihapus');
+        // return redirect()->route('absensi.index')->with('Data Absensi berhasil dihapus');
     }
 
 
     public function hideAttendance()
     {
-        $currentTime = Carbon::now();
+        // $currentTime = Carbon::now();
 
-        $deadline = Carbon::today('Asia/Jakarta')->hour('8')->minute('0')->second('0');
-
-        
+        // $deadline = Carbon::today('Asia/Jakarta')->hour('8')->minute('0')->second('0');        
     }
 }
