@@ -37,10 +37,10 @@ class AbsensiController extends Controller
 
         $validateData = $request->validate([
             'id_karyawan' => 'required',
-            'status' => 'required|in:hadir,alpha',
+            'status_absen' => 'required|in:hadir,alpha',
             'keterangan' => 'nullable',
             'tanggal_absensi' => $currentTime->toDateString(),
-            'jam' => $currentTime->toTimeString(),
+            'time' => $currentTime->toTimeString(),
         ]);
 
         if ($currentTime->greaterThan($deadline)) {
@@ -50,9 +50,11 @@ class AbsensiController extends Controller
         Absensi::create($validateData);
 
         if ($validateData['status'] == 'hadir') {
+            // totalKehadiran::create($validateData);
             //redirect ke halaman data hadir
             return redirect()->route('absensiHadir.index')->with('success', 'Data Absensi Berhasil dibuat');
         } else if ($validateData['status'] == 'alpha') {
+            // totalAlpha::create($validateData);
             //redirect ke halaman data alpha
             return redirect()->route('absensiAlpha.index')->with('success', 'Data Absensi Berhasil dibuat');
         }
