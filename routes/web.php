@@ -4,7 +4,7 @@ use App\Http\Controllers\AbsensiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\CutiController;
-
+use App\Http\Controllers\KaryawanController;
 
 //route jabatan
 Route::get('/', [JabatanController::class,'index'])->name('jabatan.read');
@@ -22,6 +22,13 @@ Route::post('/cuti/create-proses', [CutiController::class,'store'])->name('cuti.
 Route::get('/cuti/edit/{id}', [CutiController::class,'edit'])->name('cuti.edit');
 Route::put('/cuti/edit-proses/{id}', [CutiController::class,'update'])->name('cuti.update');
 Route::delete('/cuti/delete/{id}', [CutiController::class,'destroy'])->name('cuti.delete');
+
+// route karyawan
+Route::get('/karyawans', [KaryawanController::class,'index'])->name('karyawans.index');
+Route::get('/karyawans/create', [KaryawanController::class,'create'])->name('karyawans.create');
+Route::post('/karyawans/create-proses', [KaryawanController::class,'store'])->name('karyawans.store');
+Route::get('/karyawans/edit/{id}', [KaryawanController::class,'edit'])->name('karyawans.edit');
+Route::put('/karyawans/edit-proses/{id}', [KaryawanController::class,'update'])->name('karyawans.update');
 
 //route absensi
 Route::post('/absensi', [AbsensiController::class, 'store'])->name('absensi.createProses');

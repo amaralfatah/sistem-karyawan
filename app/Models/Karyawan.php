@@ -40,8 +40,8 @@ class Karyawan extends Model
     // }
 
     // Relasi dengan Gaji
-    // public function gajies()
-    // {
-    //     return $this->hasMany(Gaji::class);
-    // }
+    public function gajies()
+    {
+        return $this->hasMany(Gaji::class);
+    }
 }
