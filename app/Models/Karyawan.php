@@ -28,10 +28,10 @@ class Karyawan extends Model
     }
 
     // Relasi dengan Absensi~
-    // public function absensis()
-    // {
-    //     return $this->hasMany(Absensi::class);
-    // }
+    public function absensis()
+    {
+        return $this->hasMany(Absensi::class);
+    }
 
     // Relasi dengan Cuti
     // public function cuties()

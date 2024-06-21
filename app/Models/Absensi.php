@@ -10,7 +10,7 @@ class Absensi extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id_karyawan',
+        'karyawan_id',
         'status_absen',
         'keterangan',
         'tanggal_absensi',
@@ -18,6 +18,6 @@ class Absensi extends Model
     ];
 
     public function karyawan(){
-        return $this->hasMany(Karyawan::class);
+        return $this->belongsTo(Karyawan::class);
     }
 }

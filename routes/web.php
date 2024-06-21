@@ -29,7 +29,10 @@ Route::get('/karyawans/create', [KaryawanController::class,'create'])->name('kar
 Route::post('/karyawans/create-proses', [KaryawanController::class,'store'])->name('karyawans.store');
 Route::get('/karyawans/edit/{id}', [KaryawanController::class,'edit'])->name('karyawans.edit');
 Route::put('/karyawans/edit-proses/{id}', [KaryawanController::class,'update'])->name('karyawans.update');
+Route::delete('/karyawans/delete/{id}', [KaryawanController::class,'destroy'])->name('karyawans.delete');
 
 //route absensi
-Route::post('/absensi', [AbsensiController::class, 'store'])->name('absensi.createProses');
-Route::get('/index/absensi', [AbsensiController::class, 'index'])->name('absensi.read');
+Route::get('/absensi', [AbsensiController::class, 'index'])->name('absensi.read');
+Route::post('/absensi/create-proses', [AbsensiController::class, 'store'])->name('absensi.createProses');
+Route::get('/absensi/absensiHadir', [AbsensiController::class, 'getHadir'])->name('absensi.absensiHadir');
+Route::get('/absensi/absensiAlpha', [AbsensiController::class, 'getAlpha'])->name('absensi.absensiAlpha');

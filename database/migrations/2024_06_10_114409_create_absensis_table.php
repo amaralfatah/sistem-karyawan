@@ -16,8 +16,8 @@ return new class extends Migration
             $table->foreignId('karyawan_id')->constrained('karyawans');
             $table->enum('status_absen', ['hadir', 'alpha']);
             $table->string('keterangan')->nullable();
-            $table->date('tanggal_absensi');
-            $table->time('time');
+            $table->date('tanggal_absensi')->default(date('Y-m-d'));
+            $table->time('time')->default('00:00:00');
             $table->timestamps();
         });
     }
