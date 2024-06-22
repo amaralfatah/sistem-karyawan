@@ -5,8 +5,12 @@ use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\CutiController;
 use App\Http\Controllers\KaryawanController;
 
+Route::get('/', function () {
+    return view('index');
+});
+
 //route jabatan
-Route::get('/', [JabatanController::class,'index'])->name('jabatan.read');
+// Route::get('/', [JabatanController::class,'index'])->name('jabatan.read');
 Route::get('/create', [JabatanController::class,'create'])->name('jabatan.create');
 Route::post('/create-proses', [JabatanController::class,'store'])->name('jabatan.createProses');
 Route::get('/edit/{id}', [JabatanController::class,'edit'])->name('jabatan.edit');
