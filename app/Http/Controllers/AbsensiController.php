@@ -12,9 +12,14 @@ class AbsensiController extends Controller
 
     public function index()
     {
-        $karyawans = Karyawan::all();
+        $today = Carbon::today();
 
-        return view('absensi.read', compact('karyawans'));
+        $karyawanBelumAbsen = Karyawan::whereDoesntHave('absensis', function ($query) use ($today) {
+            $query->whereDate('tanggal_absensi', $today);
+        })->get();
+
+
+        return view('absensi.read', compact('karyawanBelumAbsen'));
     }
 
     public function create()
@@ -34,9 +39,9 @@ class AbsensiController extends Controller
         // dd($currentTime->toTimeString());
         // dd($deadline);
 
-        // if ($currentTime->greaterThan($deadline)) {
-        //     return 'failed';
-        // }
+        if ($currentTime->greaterThan($deadline)) {
+            return redirect()->route('absensi.read')->with('success', 'Absensi Sudah Tidak bisa Dilakukan');
+        }
 
         $validateData = $request->validate([
             'karyawan_id' => 'required',
@@ -49,16 +54,6 @@ class AbsensiController extends Controller
 
         Absensi::create($validateData);
         return redirect()->route('absensi.read')->with('success', 'Data Absensi Berhasil dibuat');
-
-        // if ($validateData['status'] == 'hadir') {
-        //     // totalKehadiran::create($validateData);
-        //     //redirect ke halaman data hadir
-        //     return redirect()->route('absensi.allAbsensi')->with('success', 'Data Absensi Berhasil dibuat');
-        // } else if ($validateData['status'] == 'alpha') {
-        //     // totalAlpha::create($validateData);
-        //     //redirect ke halaman data alpha
-        //     return redirect()->route('absensi.allAbsensi')->with('success', 'Data Absensi Berhasil dibuat');
-        // }
     }
 
 
@@ -117,5 +112,4 @@ class AbsensiController extends Controller
         $absensis = Absensi::where('status_absen', 'alpha')->get();
         return view('absensi.absensiAlpha', compact('absensis'));
     }
-
 }

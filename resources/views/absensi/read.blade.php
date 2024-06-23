@@ -41,20 +41,6 @@
         <div class="container">
             <div id="menu-sorting-karyawan" class="">
                 <a href="{{ route('karyawans.create') }}" class="btn btn-primary mt-5 m-3">Buat Karyawan Baru</a>
-                <div id="search-karyawan" class="ms-3 me-3 d-flex">
-                    {{-- <form action="{{ route('karyawans.search') }}" class="d-flex w-50" method="GET">
-                        <div class="input-group">
-                            <span class="input-group-text bg-white" id="basic-addon1"><i class="bi bi-search"></i></span>
-                            <input type="text" class="form-control" name="karyawan" value="{{ session('karyawan', '') }}" placeholder="Cari Karyawan" aria-describedby="basic-addon1">
-                        </div>
-                        <button type="submit" class="btn btn-secondary fw-medium ms-2">Cari</button>
-                        <select class="form-select w-50 ms-3" name="urutan" aria-label="Default select example">
-                            <option selected value="asc">Urutkan</option>
-                            <option value="asc">Teratas</option>
-                            <option value="desc">Terbawah</option>
-                        </select>
-                    </form> --}}
-                </div>
             </div>
 
             <div class="row justify-content-center mt-2">
@@ -77,31 +63,34 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($karyawans as $karyawan)
-                                <tr>
-                                    <th scope="row">{{ $loop->iteration }}</th>
-                                    <td>{{ $karyawan->name }}</td>
-                                    {{-- <td>{{ $karyawan->email }}</td>
-                                    <td>{{ $karyawan->jabatan->nama_jabatan }}</td> --}}
-                                    {{-- <td>{{ $karyawan->telephone }}</td> --}}
-                                    {{-- <td>{{ $karyawan->jenis_kelamin }}</td>
-                                    <td>{{ $karyawan->status }}</td>
-                                    <td>{{ $karyawan->ktp }}</td>
-                                    <td>{{ $karyawan->NPWP }}</td> --}}
-                                    {{-- <td>{{ $karyawan->total_kontak }}</td> --}}
-                                    <form action="{{ route('absensi.createProses') }}" method="POST" style="display:inline;">
-                                        @csrf
-                                        @method('POST')
-                                            <input type="hidden" name="karyawan_id" value="{{ $karyawan->id }}">
-                                        <td>
-                                            <input type="text" name="keterangan" class="form-control">
-                                        </td>
-                                        <td>
-                                            <button type="submit" name="status_absen" value="hadir" class="btn btn-success">Hadir</button>
-                                            <button type="submit" name="status_absen" value="alpha" class="btn btn-danger">Alpha</button>
-                                    </form>
+                            @foreach ($karyawanBelumAbsen as $karyawanBelumAbsens)
+                            <tr>
+                                <th scope="row">{{ $loop->iteration }}</th>
+                                <td>{{ $karyawanBelumAbsens->name }}</td>
+                                {{-- <td>{{ $karyawan->email }}</td>
+                                <td>{{ $karyawan->jabatan->nama_jabatan }}</td> --}}
+                                {{-- <td>{{ $karyawan->telephone }}</td> --}}
+                                {{-- <td>{{ $karyawan->jenis_kelamin }}</td>
+                                <td>{{ $karyawan->status }}</td>
+                                <td>{{ $karyawan->ktp }}</td>
+                                <td>{{ $karyawan->NPWP }}</td> --}}
+                                {{-- <td>{{ $karyawan->total_kontak }}</td> --}}
+                                <form action="{{ route('absensi.createProses') }}" method="POST"
+                                    style="display:inline;">
+                                    @csrf
+                                    @method('POST')
+                                    <input type="hidden" name="karyawan_id" value="{{ $karyawanBelumAbsens->id }}">
+                                    <td>
+                                        <input type="text" name="keterangan" class="form-control">
                                     </td>
-                                </tr>
+                                    <td>
+                                        <button type="submit" name="status_absen" value="hadir"
+                                            class="btn btn-success">Hadir</button>
+                                        <button type="submit" name="status_absen" value="alpha"
+                                            class="btn btn-danger">Alpha</button>
+                                </form>
+                                </td>
+                            </tr>
                             @endforeach
                         </tbody>
                     </table>
@@ -113,6 +102,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
+        @if (session('success'))
+        <script>
+            alert("{{ session('success') }}")
+        </script>
+    @endif
 </body>
 
 </html>
