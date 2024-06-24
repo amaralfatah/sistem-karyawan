@@ -39,9 +39,9 @@ class AbsensiController extends Controller
         // dd($currentTime->toTimeString());
         // dd($deadline);
 
-        if ($currentTime->greaterThan($deadline)) {
-            return redirect()->route('absensi.read')->with('success', 'Absensi Sudah Tidak bisa Dilakukan');
-        }
+        // if ($currentTime->greaterThan($deadline)) {
+        //     return redirect()->route('absensi.read')->with('success', 'Absensi Sudah Tidak bisa Dilakukan');
+        // }
 
         $validateData = $request->validate([
             'karyawan_id' => 'required',
