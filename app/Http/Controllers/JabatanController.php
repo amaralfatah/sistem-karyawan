@@ -13,8 +13,9 @@ class JabatanController extends Controller
     public function index()
     {
         session()->forget('jabatan');
-        $data = Jabatan::all();
-        return view('jabatan/read', compact('data'));
+        $data = Jabatan::simplePaginate(6);
+        $current = $data->currentPage();
+        return view('jabatan/read', compact('data','current'));
     }
 
     /**
@@ -32,7 +33,8 @@ class JabatanController extends Controller
     {
         $validatedData = $request->validate([
         'nama_jabatan' => 'required|string|max:255',
-        'jam_kerja' => 'required|integer|min:0',
+        'jam_selesai_kerja' => 'required|date_format:H:i',
+        'jam_mulai_kerja' => 'required|date_format:H:i',
         'note_pekerjaan' => 'required|string|max:255',
         'gaji_pokok' => 'required|integer|min:0',
         'tunjangan' => 'required|integer|min:0',
@@ -82,7 +84,10 @@ class JabatanController extends Controller
     }
 
     public function search(Request $request){
-            $data = Jabatan::where('nama_jabatan', 'like', $request->jabatan.'%')->orderBy('id', $request->urutan )->get();
+            if($request->jabatan == '' ||  $request->urutan == ''){
+                return redirect()->route('jabatan.read');
+            }
+            $data = Jabatan::where('nama_jabatan', 'like', $request->jabatan.'%')->orderBy('id', $request->urutan )->simplePaginate();
             session(['jabatan' => $request->jabatan]);
             return view('jabatan.read',compact('data'));
     }

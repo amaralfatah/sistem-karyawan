@@ -16,7 +16,8 @@ class jabatanSeeder extends Seeder
                 $jabatans = [
             [
                 'nama_jabatan' => 'Direktur',
-                'jam_kerja' => 8,
+                'jam_mulai_kerja' => '08:00:00',
+                'jam_selesai_kerja' => '15:00:00',
                 'note_pekerjaan' => 'Mengkoordinir Perusahaan',
                 'gaji_pokok' => 3000000,
                 'tunjangan' => 500000,
@@ -24,7 +25,8 @@ class jabatanSeeder extends Seeder
             ],
             [
                 'nama_jabatan' => 'Manajer',
-                'jam_kerja' => 8,
+                'jam_mulai_kerja' => '08:00:00',
+                'jam_selesai_kerja' => '15:00:00',
                 'note_pekerjaan' => 'Mengawasi dan mengelola departemen',
                 'gaji_pokok' => 2500000,
                 'tunjangan' => 400000,
@@ -32,7 +34,8 @@ class jabatanSeeder extends Seeder
             ],
             [
                 'nama_jabatan' => 'Supervisor',
-                'jam_kerja' => 8,
+                'jam_mulai_kerja' => '08:00:00',
+                'jam_selesai_kerja' => '15:00:00',
                 'note_pekerjaan' => 'Mengawasi tim kerja',
                 'gaji_pokok' => 2000000,
                 'tunjangan' => 300000,
@@ -40,7 +43,8 @@ class jabatanSeeder extends Seeder
             ],
             [
                 'nama_jabatan' => 'Staf Admin',
-                'jam_kerja' => 8,
+                'jam_mulai_kerja' => '08:00:00',
+                'jam_selesai_kerja' => '15:00:00',
                 'note_pekerjaan' => 'Mengelola administrasi',
                 'gaji_pokok' => 1500000,
                 'tunjangan' => 250000,
@@ -48,7 +52,8 @@ class jabatanSeeder extends Seeder
             ],
             [
                 'nama_jabatan' => 'Staf IT',
-                'jam_kerja' => 8,
+                'jam_mulai_kerja' => '08:00:00',
+                'jam_selesai_kerja' => '15:00:00',
                 'note_pekerjaan' => 'Mengelola sistem IT',
                 'gaji_pokok' => 1800000,
                 'tunjangan' => 300000,
@@ -56,7 +61,8 @@ class jabatanSeeder extends Seeder
             ],
             [
                 'nama_jabatan' => 'Staf Keuangan',
-                'jam_kerja' => 8,
+                'jam_mulai_kerja' => '08:00:00',
+                'jam_selesai_kerja' => '15:00:00',
                 'note_pekerjaan' => 'Mengelola keuangan perusahaan',
                 'gaji_pokok' => 1700000,
                 'tunjangan' => 250000,
@@ -64,7 +70,8 @@ class jabatanSeeder extends Seeder
             ],
             [
                 'nama_jabatan' => 'Staf HRD',
-                'jam_kerja' => 8,
+                'jam_mulai_kerja' => '08:00:00',
+                'jam_selesai_kerja' => '15:00:00',
                 'note_pekerjaan' => 'Mengelola sumber daya manusia',
                 'gaji_pokok' => 1600000,
                 'tunjangan' => 240000,
@@ -72,7 +79,8 @@ class jabatanSeeder extends Seeder
             ],
             [
                 'nama_jabatan' => 'Staf Marketing',
-                'jam_kerja' => 8,
+                'jam_mulai_kerja' => '08:00:00',
+                'jam_selesai_kerja' => '15:00:00',
                 'note_pekerjaan' => 'Mengelola pemasaran',
                 'gaji_pokok' => 1500000,
                 'tunjangan' => 230000,
@@ -80,7 +88,8 @@ class jabatanSeeder extends Seeder
             ],
             [
                 'nama_jabatan' => 'Staf Produksi',
-                'jam_kerja' => 8,
+                'jam_mulai_kerja' => '08:00:00',
+                'jam_selesai_kerja' => '15:00:00',
                 'note_pekerjaan' => 'Mengelola produksi barang',
                 'gaji_pokok' => 1400000,
                 'tunjangan' => 220000,
@@ -88,7 +97,8 @@ class jabatanSeeder extends Seeder
             ],
             [
                 'nama_jabatan' => 'Office Boy',
-                'jam_kerja' => 8,
+                'jam_mulai_kerja' => '08:00:00',
+                'jam_selesai_kerja' => '15:00:00',
                 'note_pekerjaan' => 'Membersihkan kantor',
                 'gaji_pokok' => 1200000,
                 'tunjangan' => 200000,

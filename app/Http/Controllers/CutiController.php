@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cuti;
+use App\Models\Karyawan;
 use Illuminate\Http\Request;
 
 class CutiController extends Controller
@@ -21,7 +22,8 @@ class CutiController extends Controller
      */
     public function create()
     {
-            return view('cuti/create');
+            $karyawan = Karyawan::all();
+            return view('cuti/create',compact('karyawan'));
     }
 
     /**
@@ -30,7 +32,7 @@ class CutiController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            // 'karyawan_id' => 'required|exists:karyawans,id',
+            'karyawan_id' => 'required|exists:karyawans,id',
             'tanggal_mulai' => 'required|date',
             'tanggal_berakhir' => 'required|date|after_or_equal:tanggal_mulai',
             'keterangan' => 'required|string|max:255',
@@ -56,7 +58,8 @@ class CutiController extends Controller
     public function edit(Request $request, $id)
     {
         $data = Cuti::find($id);
-        return view('cuti/edit',compact('data'));
+        $karyawan = Karyawan::all();
+        return view('cuti/edit',compact('data','karyawan'));
     }
 
     /**
