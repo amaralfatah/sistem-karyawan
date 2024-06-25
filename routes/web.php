@@ -41,9 +41,3 @@ Route::get('/absensi', [AbsensiController::class, 'index'])->name('absensi.read'
 Route::post('/absensi/create-proses', [AbsensiController::class, 'store'])->name('absensi.createProses');
 Route::get('/absensi/absensiHadir', [AbsensiController::class, 'getHadir'])->name('absensi.absensiHadir');
 Route::get('/absensi/absensiAlpha', [AbsensiController::class, 'getAlpha'])->name('absensi.absensiAlpha');
-
-//route absensi
-Route::get('/absensi', [AbsensiController::class, 'index'])->name('absensi.read');
-Route::post('/absensi/create-proses', [AbsensiController::class, 'store'])->name('absensi.createProses');
-Route::get('/absensi/absensiHadir', [AbsensiController::class, 'getHadir'])->name('absensi.absensiHadir');
-Route::get('/absensi/absensiAlpha', [AbsensiController::class, 'getAlpha'])->name('absensi.absensiAlpha');
