@@ -34,3 +34,6 @@ Route::post('/karyawans/create-proses', [KaryawanController::class,'store'])->na
 Route::get('/karyawans/edit/{id}', [KaryawanController::class,'edit'])->name('karyawans.edit');
 Route::put('/karyawans/edit-proses/{id}', [KaryawanController::class,'update'])->name('karyawans.update');
 Route::delete('/karyawans/delete/{id}', [KaryawanController::class,'destroy'])->name('karyawans.delete');
+
+// route kehadiran
+Route::get('/kehadirans', [KaryawanController::class,'index'])->name('kehadirans.index');
