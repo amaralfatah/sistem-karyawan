@@ -11,7 +11,8 @@ class Jabatan extends Model
 
     protected $fillable = [
         'nama_jabatan',
-        'jam_kerja',
+        'jam_mulai_kerja',
+        'jam_selesai_kerja',
         'note_pekerjaan',
         'gaji_pokok',
         'tunjangan',
@@ -20,6 +21,6 @@ class Jabatan extends Model
 
     //  Relasi ke karyawans
     public function karyawans(){
-        return $this->belongsTo(Karyawan::class);
+        return $this->hasMany(Karyawan::class);
     }
 }

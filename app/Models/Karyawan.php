@@ -24,7 +24,7 @@ class Karyawan extends Model
     // Relasi dengan Jabatan
     public function jabatan()
     {
-        return $this->belongsTo(Jabatan::class);
+    return $this->belongsTo(Jabatan::class);
     }
 
     // Relasi dengan Absensi~
@@ -34,10 +34,10 @@ class Karyawan extends Model
     }
 
     // Relasi dengan Cuti
-    // public function cuties()
-    // {
-    //     return $this->hasMany(Cuti::class);
-    // }
+    public function cutis()
+    {
+        return $this->hasMany(Cuti::class, 'karyawan_id');
+    }
 
     // Relasi dengan Gaji
     public function gajies()

@@ -1,23 +1,63 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  </head>
-  <body>
-    
+<!-- resources/views/home.blade.php -->
+@extends('layouts.main')
+
+@section('title', 'Home')
+@section('links')
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<style>
+  .select2-container--default .select2-selection--single {
+    background-color: #1f0606;
+    border: 1px solid #aaa;
+    border-radius: 4px
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: #fff;
+    line-height: 28px
+}
+.select2-dropdown {
+    background-color: #1f0606;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    left: -100000px;
+    width: 100%;
+    z-index: 1051
+}
+.select2-results__option {
+    padding: 6px;
+    color: white;
+    user-select: none;
+    -webkit-user-select: none
+}
+</style>
+
+@endsection
+
+@section('navCuti')
+active
+@endsection
+
+@section('content')
+
     <section id="edit">
-      <div class="container mt-5">
+      <div class="container m-5">
         <div class="row justify-content-center">
-          <div class="col-8">
-            <form action="{{ route('cuti.update', ['id' => $data->id]) }}" method="POST">
+          <div class="col-8 bg-secondary rounded p-5">
+            <form action="{{ route('cuti.update', ['id' => $data->id]) }}" method="POST" class="text-white">
               @csrf
                 @method('PUT')
               <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label fw-medium">Nama Karyawan</label>
-                {{-- <input type="text" name="karyawan_id" value="{{ $data->karyawan_id }}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"> --}}
+                <select class="form-select" aria-label="Default select example" name="karyawan_id">
+                  <option selected value="{{ $data->karyawan_id }}">{{ optional($data->karyawan)->name }}</option>
+                  @foreach ($karyawan as $items)
+                  <option value="{{ $items->id }}">{{ $items->name }}</option>
+                  @endforeach
+
+                </select>
               </div>
               <div class="mb-3">
                 <label for="date" class="form-label">Tanggal Mulai</label>
@@ -42,6 +82,16 @@
       </div>
     </section>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-  </body>
-</html>
+   
+@endsection
+
+@section('script')
+
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('.form-select').select2();
+});
+</script>
+
+@endsection

@@ -18,7 +18,8 @@ class Cuti extends Model
     ];
 
     // Relasi ke karyawans
-    public function karyawans(){
-        return $this->hasMany(Karyawan::class);
+    public function karyawan()
+    {
+        return $this->belongsTo(Karyawan::class, 'karyawan_id');
     }
 }

@@ -10,8 +10,8 @@
         }, 1);
     };
     spinner();
-    
-    
+
+
     // Back to top button
     $(window).scroll(function () {
         if ($(this).scrollTop() > 300) {
@@ -62,6 +62,9 @@
     // Chart Global Color
     Chart.defaults.color = "#6C7293";
     Chart.defaults.borderColor = "#000000";
+
+
+
 
 
     // Worldwide Sales Chart
@@ -117,7 +120,7 @@
             responsive: true
         }
     });
-    
+
 
 
     // Single Line Chart
@@ -207,6 +210,6 @@
         }
     });
 
-    
+
 })(jQuery);
 

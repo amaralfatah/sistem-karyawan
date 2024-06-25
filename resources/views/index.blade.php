@@ -2,17 +2,19 @@
 @extends('layouts.main')
 
 @section('title', 'Home')
-
+@section('navDashboard')
+active
+@endsection
 @section('content')
     <!-- Sale & Revenue Start -->
     <div class="container-fluid pt-4 px-4">
         <div class="row g-4">
             <div class="col-sm-6 col-xl-3">
                 <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-                    <i class="fa fa-chart-line fa-3x text-primary"></i>
+                    <i class="fa fa-chart-bar fa-3x text-primary"></i>
                     <div class="ms-3">
-                        <p class="mb-2">Today Sale</p>
-                        <h6 class="mb-0">$1234</h6>
+                        <p class="mb-2">Absensi Hadir Hari Ini</p>
+                        <h6 class="mb-0">{{ $totalKehadiranHariIni }}</h6>
                     </div>
                 </div>
             </div>
@@ -20,8 +22,44 @@
                 <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
                     <i class="fa fa-chart-bar fa-3x text-primary"></i>
                     <div class="ms-3">
-                        <p class="mb-2">Total Sale</p>
-                        <h6 class="mb-0">$1234</h6>
+                        <p class="mb-2">Absensi Alpha Hari Ini</p>
+                        <h6 class="mb-0">{{ $totalAlphaHariIni }}</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-xl-3">
+                <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                    <i class="fa fa-chart-bar fa-3x text-primary"></i>
+                    <div class="ms-3">
+                        <p class="mb-2">Absensi Hadir Bulan Ini</p>
+                        <h6 class="mb-0">{{ $totalKehadiranBulanIni }}</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-xl-3">
+                <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                    <i class="fa fa-chart-bar fa-3x text-primary"></i>
+                    <div class="ms-3">
+                        <p class="mb-2">Absensi Alpha Bulan Ini</p>
+                        <h6 class="mb-0">{{ $totalAlphaBulanIni }}</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-xl-3">
+                <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                    <i class="fa fa-chart-line fa-3x text-primary"></i>
+                    <div class="ms-3">
+                        <p class="mb-2">Total Semua Karyawan</p>
+                        <h6 class="mb-0">{{ $dataKaryawan }}</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-xl-3">
+                <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                    <i class="fa fa-chart-line fa-3x text-primary"></i>
+                    <div class="ms-3">
+                        <p class="mb-2">Rekap Total Cuti Bulan Ini</p>
+                        <h6 class="mb-0">{{ $dataCuti }}</h6>
                     </div>
                 </div>
             </div>
@@ -29,7 +67,7 @@
                 <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
                     <i class="fa fa-chart-area fa-3x text-primary"></i>
                     <div class="ms-3">
-                        <p class="mb-2">Today Revenue</p>
+                        <p class="mb-2">Pengeluaran Gaji Bulan Ini</p>
                         <h6 class="mb-0">$1234</h6>
                     </div>
                 </div>
@@ -38,11 +76,12 @@
                 <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
                     <i class="fa fa-chart-pie fa-3x text-primary"></i>
                     <div class="ms-3">
-                        <p class="mb-2">Total Revenue</p>
+                        <p class="mb-2">Pengeluaran Gaji Tahunan Ini</p>
                         <h6 class="mb-0">$1234</h6>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
     <!-- Sale & Revenue End -->
@@ -54,19 +93,19 @@
             <div class="col-sm-12 col-xl-6">
                 <div class="bg-secondary text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h6 class="mb-0">Worldwide Sales</h6>
+                        <h6 class="mb-0">Grafik Kehadiran</h6>
                         <a href="">Show All</a>
                     </div>
-                    <canvas id="worldwide-sales"></canvas>
+                    <canvas id="absensi-trafik"></canvas>
                 </div>
             </div>
             <div class="col-sm-12 col-xl-6">
                 <div class="bg-secondary text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h6 class="mb-0">Salse & Revenue</h6>
+                        <h6 class="mb-0">Grafik Pengeluaran Gaji</h6>
                         <a href="">Show All</a>
                     </div>
-                    <canvas id="salse-revenue"></canvas>
+                    <canvas id="gaji-trafik"></canvas>
                 </div>
             </div>
         </div>
@@ -74,73 +113,84 @@
     <!-- Sales Chart End -->
 
 
-    <!-- Recent Sales Start -->
+    <!-- Recent Absensi start-->
     <div class="container-fluid pt-4 px-4">
         <div class="bg-secondary text-center rounded p-4">
             <div class="d-flex align-items-center justify-content-between mb-4">
-                <h6 class="mb-0">Recent Salse</h6>
+                <h6 class="mb-0">Absensi Terbaru</h6>
                 <a href="">Show All</a>
             </div>
             <div class="table-responsive">
                 <table class="table text-start align-middle table-bordered table-hover mb-0">
                     <thead>
-                        <tr class="text-white">
-                            <th scope="col"><input class="form-check-input" type="checkbox"></th>
-                            <th scope="col">Date</th>
-                            <th scope="col">Invoice</th>
-                            <th scope="col">Customer</th>
-                            <th scope="col">Amount</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><input class="form-check-input" type="checkbox"></td>
-                            <td>01 Jan 2045</td>
-                            <td>INV-0123</td>
-                            <td>Jhon Doe</td>
-                            <td>$123</td>
-                            <td>Paid</td>
-                            <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                        </tr>
-                        <tr>
-                            <td><input class="form-check-input" type="checkbox"></td>
-                            <td>01 Jan 2045</td>
-                            <td>INV-0123</td>
-                            <td>Jhon Doe</td>
-                            <td>$123</td>
-                            <td>Paid</td>
-                            <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                        </tr>
-                        <tr>
-                            <td><input class="form-check-input" type="checkbox"></td>
-                            <td>01 Jan 2045</td>
-                            <td>INV-0123</td>
-                            <td>Jhon Doe</td>
-                            <td>$123</td>
-                            <td>Paid</td>
-                            <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                        </tr>
-                        <tr>
-                            <td><input class="form-check-input" type="checkbox"></td>
-                            <td>01 Jan 2045</td>
-                            <td>INV-0123</td>
-                            <td>Jhon Doe</td>
-                            <td>$123</td>
-                            <td>Paid</td>
-                            <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                        </tr>
-                        <tr>
-                            <td><input class="form-check-input" type="checkbox"></td>
-                            <td>01 Jan 2045</td>
-                            <td>INV-0123</td>
-                            <td>Jhon Doe</td>
-                            <td>$123</td>
-                            <td>Paid</td>
-                            <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                        </tr>
+                            <tr>
+                                <th scope="col">No</th>
+                                <th scope="col">Nama</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Tanggal</th>
+                                <th scope="col">Jam</th>
+                                <th scope="col">bulan dan tahun</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($absensis as $absensi)
+                                <tr>
+                                    <th scope="row">{{ $loop->iteration }}</th>
+                                    <td>{{ $absensi->karyawan->name }}</td>
+                                    <td>{{ $absensi->status_absen }}</td>
+                                    <td>{{ $absensi->tanggal_absensi }}</td>
+                                    <td>{{ $absensi->time }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($absensi->tanggal_absensi)->isoFormat('MMMM, YYYY') }}</td>
+                                </tr>
+                            @endforeach
                     </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- Recent Absensi End -->
+
+    <!-- Recent Cuti Start -->
+    <div class="container-fluid pt-4 px-4">
+        <div class="bg-secondary text-center rounded p-4">
+            <div class="d-flex align-items-center justify-content-between mb-4">
+                <h6 class="mb-0">Data Cuti Terbaru</h6>
+                <a href="">Show All</a>
+            </div>
+            <div class="table-responsive">
+                <table class="table text-start align-middle table-bordered table-hover mb-0">
+                    <thead>
+                            <tr class="text-center">
+                                <th scope="col">No</th>
+                                <th scope="col">Nama Kariyawan</th>
+                                <th scope="col">Tanggal Mulai</th>
+                                <th scope="col">Tanggal Berakhir</th>
+                                <th scope="col">Keterangan</th>
+                                <th scope="col">Jenis Cuti</th>
+                                <th scope="col">Opsi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($dataCutis as $items)
+                                <tr class="text-center">
+                                    <th scope="row">{{ $loop->iteration }}</th>
+                                    <td>{{ optional($items->karyawan)->name }}</td>
+                                    <td>{{ $items->tanggal_mulai }}</td>
+                                    <td>{{ $items->tanggal_berakhir }}</td>
+                                    <td>{{ $items->keterangan }}</td>
+                                    <td>{{ $items->jenis_cuti }}</td>
+                                    <td class="opsi"><a href="{{ route('cuti.edit', ['id' => $items->id]) }}"
+                                            class="btn btn-warning"> Edit </a> | <form
+                                            action="{{ route('cuti.delete', ['id' => $items->id]) }}" method="POST" class="d-inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+
+                        </tbody>
                 </table>
             </div>
         </div>
@@ -148,124 +198,43 @@
     <!-- Recent Sales End -->
 
 
-    <!-- Widgets Start -->
-    <div class="container-fluid pt-4 px-4">
-        <div class="row g-4">
-            <div class="col-sm-12 col-md-6 col-xl-4">
-                <div class="h-100 bg-secondary rounded p-4">
-                    <div class="d-flex align-items-center justify-content-between mb-2">
-                        <h6 class="mb-0">Messages</h6>
-                        <a href="">Show All</a>
-                    </div>
-                    <div class="d-flex align-items-center border-bottom py-3">
-                        <img class="rounded-circle flex-shrink-0" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                        <div class="w-100 ms-3">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h6 class="mb-0">Jhon Doe</h6>
-                                <small>15 minutes ago</small>
-                            </div>
-                            <span>Short message goes here...</span>
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-center border-bottom py-3">
-                        <img class="rounded-circle flex-shrink-0" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                        <div class="w-100 ms-3">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h6 class="mb-0">Jhon Doe</h6>
-                                <small>15 minutes ago</small>
-                            </div>
-                            <span>Short message goes here...</span>
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-center border-bottom py-3">
-                        <img class="rounded-circle flex-shrink-0" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                        <div class="w-100 ms-3">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h6 class="mb-0">Jhon Doe</h6>
-                                <small>15 minutes ago</small>
-                            </div>
-                            <span>Short message goes here...</span>
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-center pt-3">
-                        <img class="rounded-circle flex-shrink-0" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                        <div class="w-100 ms-3">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h6 class="mb-0">Jhon Doe</h6>
-                                <small>15 minutes ago</small>
-                            </div>
-                            <span>Short message goes here...</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-12 col-md-6 col-xl-4">
-                <div class="h-100 bg-secondary rounded p-4">
-                    <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h6 class="mb-0">Calender</h6>
-                        <a href="">Show All</a>
-                    </div>
-                    <div id="calender"></div>
-                </div>
-            </div>
-            <div class="col-sm-12 col-md-6 col-xl-4">
-                <div class="h-100 bg-secondary rounded p-4">
-                    <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h6 class="mb-0">To Do List</h6>
-                        <a href="">Show All</a>
-                    </div>
-                    <div class="d-flex mb-2">
-                        <input class="form-control bg-dark border-0" type="text" placeholder="Enter task">
-                        <button type="button" class="btn btn-primary ms-2">Add</button>
-                    </div>
-                    <div class="d-flex align-items-center border-bottom py-2">
-                        <input class="form-check-input m-0" type="checkbox">
-                        <div class="w-100 ms-3">
-                            <div class="d-flex w-100 align-items-center justify-content-between">
-                                <span>Short task goes here...</span>
-                                <button class="btn btn-sm"><i class="fa fa-times"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-center border-bottom py-2">
-                        <input class="form-check-input m-0" type="checkbox">
-                        <div class="w-100 ms-3">
-                            <div class="d-flex w-100 align-items-center justify-content-between">
-                                <span>Short task goes here...</span>
-                                <button class="btn btn-sm"><i class="fa fa-times"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-center border-bottom py-2">
-                        <input class="form-check-input m-0" type="checkbox" checked>
-                        <div class="w-100 ms-3">
-                            <div class="d-flex w-100 align-items-center justify-content-between">
-                                <span><del>Short task goes here...</del></span>
-                                <button class="btn btn-sm text-primary"><i class="fa fa-times"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-center border-bottom py-2">
-                        <input class="form-check-input m-0" type="checkbox">
-                        <div class="w-100 ms-3">
-                            <div class="d-flex w-100 align-items-center justify-content-between">
-                                <span>Short task goes here...</span>
-                                <button class="btn btn-sm"><i class="fa fa-times"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-center pt-2">
-                        <input class="form-check-input m-0" type="checkbox">
-                        <div class="w-100 ms-3">
-                            <div class="d-flex w-100 align-items-center justify-content-between">
-                                <span>Short task goes here...</span>
-                                <button class="btn btn-sm"><i class="fa fa-times"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Widgets End -->
 @endsection
+
+@section('script')
+<script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var ctx = document.getElementById('absensi-trafik').getContext('2d');
+
+            // Mengonversi data PHP ke JSON untuk digunakan di JavaScript
+            var chartData = @json($dataAbsensi);
+            var labels = Object.keys(chartData).map(function(key) {
+                var date = new Date(key);
+                return date.toLocaleDateString();
+            });
+            var values = Object.values(chartData);
+
+            var myChart = new Chart(ctx, {
+                type: 'line', // Menggunakan grafik garis untuk kehadiran harian
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Jumlah Kehadiran',
+                        data: values,
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1,
+                        fill: true
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+@endsection
+
