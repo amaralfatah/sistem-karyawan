@@ -1,13 +1,14 @@
 <?php
 
+use App\Http\Controllers\AbsensiController;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\CutiController;
+use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\KaryawanController;
 
-Route::get('/', function () {
-    return view('index');
-})->name('index');
+Route::get('/', [Dashboard::class,'index'] )->name('index');
 
 
 //route jabatan
@@ -34,3 +35,10 @@ Route::post('/karyawans/create-proses', [KaryawanController::class,'store'])->na
 Route::get('/karyawans/edit/{id}', [KaryawanController::class,'edit'])->name('karyawans.edit');
 Route::put('/karyawans/edit-proses/{id}', [KaryawanController::class,'update'])->name('karyawans.update');
 Route::delete('/karyawans/delete/{id}', [KaryawanController::class,'destroy'])->name('karyawans.delete');
+
+
+//route absensi
+Route::get('/absensi', [AbsensiController::class, 'index'])->name('absensi.read');
+Route::post('/absensi/create-proses', [AbsensiController::class, 'store'])->name('absensi.createProses');
+Route::get('/absensi/absensiHadir', [AbsensiController::class, 'getHadir'])->name('absensi.absensiHadir');
+Route::get('/absensi/absensiAlpha', [AbsensiController::class, 'getAlpha'])->name('absensi.absensiAlpha');

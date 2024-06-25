@@ -44,7 +44,7 @@ active
                         <tbody>
                             @foreach ($data as $items)
                                 <tr class="text-center">
-                                    <th scope="row">{{ $loop->iteration }}</th>
+                                    <th scope="row">{{ ($data->currentPage() - 1) * $data->perPage() + $loop->iteration }}</th>
                                     <td>{{ optional($items->karyawan)->name }}</td>
                                     <td>{{ $items->tanggal_mulai }}</td>
                                     <td>{{ $items->tanggal_berakhir }}</td>
@@ -58,7 +58,7 @@ active
                                             <button type="submit" class="btn btn-danger">Delete</button>
                                         </form>
                                     </td>
-                                </tr>
+                                </tr> 
                             @endforeach
 
                         </tbody>
@@ -66,6 +66,19 @@ active
 
                 </div>
             </div>
+
+            <div class="d-flex justify-content-between px-5">
+            <div class="d-flex gap-2">
+                <p>Showing</p>
+                {{ $data->firstItem() }}
+                <p>to</p>
+                {{ $data->lastItem() }}
+            </div>
+            <div>
+                {{ $data->links() }}
+            </div>
+            </div>
+
         </div>
 
     </section>

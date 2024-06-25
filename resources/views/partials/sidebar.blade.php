@@ -16,6 +16,14 @@
         <div class="navbar-nav w-100">
             <a href="{{ route('index') }}" class="nav-item nav-link @yield('navDashboard') "><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
             <a href="{{ route('karyawans.index') }}" class="nav-item nav-link @yield('navKaryawan')"><i class="fa fa-users me-2"></i>Karyawan</a>
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Absensi</a>
+                <div class="dropdown-menu bg-transparent border-0">
+                    <a href="{{ route('absensi.read') }}" class="dropdown-item">Absensi</a>
+                    <a href="{{ route('absensi.absensiHadir') }}" class="dropdown-item">Daftar Hadir</a>
+                    <a href="{{ route('absensi.absensiAlpha') }}" class="dropdown-item">Daftar Alpha</a>
+                </div>
+            </div>
             <a href="{{ route('jabatan.read') }}" class="nav-item nav-link @yield('navJabatan')"><i class="fa fa-th me-2"></i>Jabatan</a>
             <a href="{{ route('cuti.read') }}" class="nav-item nav-link @yield('navCuti')"><i class="fa fa-keyboard me-2"></i>Cuti</a>
             <a href="table.html" class="nav-item nav-link @yield('navAbsensi')"><i class="fa fa-table me-2"></i>Tables</a>

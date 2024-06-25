@@ -64,7 +64,7 @@ active
                         <tbody>
                             @foreach ($data as $items)
                                 <tr class="text-center">
-                                    <th scope="row">{{ ($data->currentPage() - 1) * $data->perPage() + $loop->iteration }}
+                                    <th scope="row">{{ ($data->currentPage() - 1) * $data->perPage() + $loop->iteration }}</th>
                                     <td>{{ $items->nama_jabatan }}</td>
                                     <td>{{ substr($items->jam_mulai_kerja,0,5) }}</td>
                                     <td>{{ substr($items->jam_selesai_kerja,0,5) }}</td>

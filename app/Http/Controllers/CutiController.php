@@ -13,9 +13,10 @@ class CutiController extends Controller
      */
     public function index()
     {
-        $data = Cuti::all();
-        return view('cuti/read', compact('data'));
-    }
+        $data = Cuti::simplePaginate(6);
+        $current = $data->currentPage();
+        return view('cuti/read', compact('data','current'));
+    } 
 
     /**
      * Show the form for creating a new resource.

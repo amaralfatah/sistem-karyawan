@@ -24,14 +24,14 @@ class Karyawan extends Model
     // Relasi dengan Jabatan
     public function jabatan()
     {
-        return $this->belongsTo(Karyawan::class);
+    return $this->belongsTo(Jabatan::class);
     }
 
     // Relasi dengan Absensi~
-    // public function absensis()
-    // {
-    //     return $this->hasMany(Absensi::class);
-    // }
+    public function absensis()
+    {
+        return $this->hasMany(Absensi::class);
+    }
 
     // Relasi dengan Cuti
     public function cutis()

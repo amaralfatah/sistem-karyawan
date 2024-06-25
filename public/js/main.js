@@ -64,6 +64,9 @@
     Chart.defaults.borderColor = "#000000";
 
 
+
+        
+
     // Worldwide Sales Chart
     var ctx1 = $("#worldwide-sales").get(0).getContext("2d");
     var myChart1 = new Chart(ctx1, {
