@@ -6,8 +6,10 @@ use App\Models\Absensi;
 use App\Models\Cuti;
 use App\Models\Gaji;
 use App\Models\Karyawan;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class Dashboard extends Controller
 {
@@ -48,5 +50,10 @@ class Dashboard extends Controller
 
         $gaji = Gaji::all();
         return view('index',compact('absensis','dataCuti','dataCutis','dataAbsensi','gaji','dataKaryawan','totalKehadiranHariIni','totalKehadiranBulanIni','totalAlphaHariIni','totalAlphaBulanIni'));
+    }
+
+    public function profile(){
+        $data = Auth::user();
+        return view('profile',compact('data'));
     }
 }

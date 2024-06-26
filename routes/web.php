@@ -8,9 +8,19 @@ use App\Http\Controllers\CutiController;
 use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\GajiController;
 use App\Http\Controllers\KaryawanController;
+use App\Http\Controllers\LoginController;
 
 Route::get('/', [Dashboard::class,'index'] )->name('index');
+Route::get('/profile', [Dashboard::class,'profile'] )->name('profile');
 
+// route login/logout
+Route::controller(LoginController::class)->prefix('login')->group(function() {
+    Route::get('/', 'login')->name('login');
+    Route::post('/', 'actionlogin')->name('actionlogin');
+});
+
+Route::get('actionlogout', [LoginController::class, 'actionlogout'])->name('actionlogout');
+Route::get('actionAdminUpdate', [LoginController::class, 'actionAdminUpdate'])->name('actionAdminUpdate');
 
 //route jabatan
 Route::get('/jabatans', [JabatanController::class,'index'])->name('jabatan.read');
