@@ -26,8 +26,8 @@
             </div>
             <a href="{{ route('jabatan.read') }}" class="nav-item nav-link @yield('navJabatan')"><i class="fa fa-th me-2"></i>Jabatan</a>
             <a href="{{ route('cuti.read') }}" class="nav-item nav-link @yield('navCuti')"><i class="fa fa-keyboard me-2"></i>Cuti</a>
-            <a href="table.html" class="nav-item nav-link @yield('navAbsensi')"><i class="fa fa-table me-2"></i>Tables</a>
-            <a href="chart.html" class="nav-item nav-link @yield('navGaji')"><i class="fa fa-chart-bar me-2"></i>Charts</a>
+            <a href="{{ route('cuti.read') }}" class="nav-item nav-link @yield('navAbsensi')"><i class="fa fa-table me-2"></i>Tables</a>
+            <a href="{{ route('gaji.index') }}" class="nav-item nav-link @yield('navGaji')"><i class="fa fa-chart-bar me-2"></i>Gaji</a>
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Pages</a>
                 <div class="dropdown-menu bg-transparent border-0">

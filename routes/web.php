@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\CutiController;
 use App\Http\Controllers\Dashboard;
+use App\Http\Controllers\GajiController;
 use App\Http\Controllers\KaryawanController;
 
 Route::get('/', [Dashboard::class,'index'] )->name('index');
@@ -42,3 +43,13 @@ Route::get('/absensi', [AbsensiController::class, 'index'])->name('absensi.read'
 Route::post('/absensi/create-proses', [AbsensiController::class, 'store'])->name('absensi.createProses');
 Route::get('/absensi/absensiHadir', [AbsensiController::class, 'getHadir'])->name('absensi.absensiHadir');
 Route::get('/absensi/absensiAlpha', [AbsensiController::class, 'getAlpha'])->name('absensi.absensiAlpha');
+
+// route gaji
+Route::get('/gajis', [GajiController::class, 'index'])->name('gaji.index');
+// Route::get('/gajis/create', [GajiController::class, 'create'])->name('gaji.create');
+// Route::post('/gajis', [GajiController::class, 'store'])->name('gaji.store');
+// Route::get('/gajis/{id}', [GajiController::class, 'show'])->name('gaji.show');
+// Route::get('/gajis/{id}/edit', [GajiController::class, 'edit'])->name('gaji.edit');
+// Route::put('/gajis/{id}', [GajiController::class, 'update'])->name('gaji.update');
+// Route::delete('/gajis/{id}', [GajiController::class, 'destroy'])->name('gaji.destroy');
+

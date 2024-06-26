@@ -3,76 +3,38 @@
 namespace App\Http\Controllers;
 
 use App\Models\Gaji;
-use App\Models\Karyawan;
 use Illuminate\Http\Request;
 
 class GajiController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $gajis = Gaji::with('karyawan.jabatan')->get();
+        
+        $gajis = $gajis->map(function ($gaji) {
+            $gaji->total_potongan = $this->calculateTotalPotongan($gaji);
+            $gaji->total_tunjangan = $this->calculateTotalTunjangan($gaji);
+            $gaji->total_gaji = $this->calculateTotalGaji($gaji);
+            return $gaji;
+        });
+        
+        return view('gaji.index', compact('gajis'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+    private function calculateTotalPotongan($gaji) {
+        return $gaji->karyawan->absensis->where('status_absen', 'alpha')->count() * $gaji->karyawan->jabatan->potongan;
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
+    private function calculateTotalTunjangan($gaji) {
+        return $gaji->karyawan->total_kontak * $gaji->karyawan->jabatan->tunjangan;
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Gaji $gaji)
-    {
-        //
-    }
+    private function calculateTotalGaji($gaji) {
+        $gajiPokok = $gaji->karyawan->jabatan->gaji_pokok;
+        $tunjangan = $gaji->karyawan->jabatan->tunjangan;
+        $totalKontak = $gaji->karyawan->total_kontak;
+        $totalPotongan = $this->calculateTotalPotongan($gaji);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Gaji $gaji)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Gaji $gaji)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Gaji $gaji)
-    {
-        //
-    }
-
-    public function gajian($id)
-    {
-        $karyawan = Karyawan::find($id);
-        $jabatan = $karyawan->jabatan;
-
-        $total_gaji = $jabatan->gaji_pokok * $karyawan->total_kontak;
-        $gaji_perbulan = $total_gaji / 12;
-        $total_alpha = 0;
-
-        return view('gaji.gajian', compact('karyawan', 'total_gaji', 'gaji_perbulan', 'total_alpha'));
+        return (($gajiPokok + $tunjangan) * $totalKontak) - $totalPotongan;
     }
 }
