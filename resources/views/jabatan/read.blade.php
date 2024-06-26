@@ -4,10 +4,12 @@
 @section('title', 'Home')
 @section('links')
 <style>
-    #table-jabatan,
+    #table-jabatan{
+        font-size: 0.7rem;
+    }
     #table-jabatan .opsi a,
     #table-jabatan .opsi button {
-        font-size: 0.8rem;
+        font-size: 0.6rem;
     }
 
     

@@ -11,14 +11,35 @@ class JabatanFactory extends Factory
 
     public function definition()
     {
+        $faker = \Faker\Factory::create('id_ID'); 
+
+        $jabatanIT = [
+            'Software Engineer',
+            'Backend Developer',
+            'Frontend Developer',
+            'Full Stack Developer',
+            'System Analyst',
+            'Database Administrator',
+            'DevOps Engineer',
+            'Mobile App Developer',
+            'IT Support Specialist',
+            'Data Scientist',
+            'Cyber Security Specialist',
+            'Network Engineer',
+            'IT Project Manager',
+            'UI/UX Designer',
+            'Quality Assurance Engineer',
+            'Cloud Engineer',
+        ];
+
         return [
-            'nama_jabatan' => $this->faker->jobTitle,
-            'jam_mulai_kerja' => $this->faker->time(),
-            'jam_selesai_kerja' => $this->faker->time(),
-            'note_pekerjaan' => $this->faker->sentence(),
-            'gaji_pokok' => $this->faker->numberBetween(3000000, 7000000),
-            'tunjangan' => $this->faker->numberBetween(500000, 2000000),
-            'potongan' => $this->faker->numberBetween(100000, 1000000),
+            'nama_jabatan' => $faker->randomElement($jabatanIT),
+            'jam_mulai_kerja' => $faker->dateTimeBetween('08:00:00', '10:00:00')->format('H:i:s'),
+            'jam_selesai_kerja' => $faker->dateTimeBetween('12:00:00', '16:00:00')->format('H:i:s'),
+            'note_pekerjaan' => $faker->sentence(),
+            'gaji_pokok' => $faker->numberBetween(3, 7) * 1000000,
+            'tunjangan' => $faker->numberBetween(5, 20) * 100000,
+            'potongan' => $faker->numberBetween(1, 10) * 100000,
         ];
     }
 }
