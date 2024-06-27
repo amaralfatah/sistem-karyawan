@@ -19,9 +19,16 @@ class Dashboard extends Controller
         $dataCutis = Cuti::paginate(6);
         $absensi = Absensi::all();
         $absensis = Absensi::paginate(6);
-        $dataAbsensi = $absensi->groupBy('tanggal_absensi')->map(function ($row) {
+        //grafik hadir
+        $dataAbsensi = $absensi->where('status_absen', 'hadir')->groupBy('tanggal_absensi')->map(function ($row) {
             return $row->count();
         });
+
+        //grafik alpha
+        $dataAlpha = $absensi->where('status_absen', 'alpha')->groupBy('tanggal_absensi')->map(function ($row) {
+            return $row->count();
+        });
+
         // Mendapatkan tanggal hari ini
         $today = Carbon::today();
 
@@ -49,7 +56,7 @@ class Dashboard extends Controller
             ->count();     
 
         $gaji = Gaji::all();
-        return view('index',compact('absensis','dataCuti','dataCutis','dataAbsensi','gaji','dataKaryawan','totalKehadiranHariIni','totalKehadiranBulanIni','totalAlphaHariIni','totalAlphaBulanIni'));
+        return view('index',compact('absensis','dataAlpha','dataCuti','dataCutis','dataAbsensi','gaji','dataKaryawan','totalKehadiranHariIni','totalKehadiranBulanIni','totalAlphaHariIni','totalAlphaBulanIni'));
     }
 
     public function profile(){

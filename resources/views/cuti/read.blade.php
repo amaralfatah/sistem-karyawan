@@ -45,9 +45,8 @@ active
                 @foreach ($data as $items )
 
                 <tr>
-                <th scope="row">{{ $loop->iteration }}</th>
-                <td> Coming Soon </td>
-                {{-- <td>{{ $items->karyawans->name }}</td> --}}
+                <th scope="row">{{ ($data->currentPage() - 1) * $data->perPage() + $loop->iteration }}</th>
+                <td>{{ optional($items->karyawan)->name }}</td>
                 <td>{{ $items->tanggal_mulai }}</td>
                 <td>{{ $items->tanggal_berakhir }}</td>
                 <td>{{ $items->keterangan }}</td>
@@ -85,7 +84,3 @@ active
 
 
 @endsection
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-  </body>
-</html>
