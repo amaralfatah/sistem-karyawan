@@ -10,17 +10,21 @@ use App\Http\Controllers\GajiController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\LoginController;
 
-Route::get('/', [Dashboard::class,'index'] )->name('index');
-Route::get('/profile', [Dashboard::class,'profile'] )->name('profile');
+
+
 
 // route login/logout
-Route::controller(LoginController::class)->prefix('login')->group(function() {
-    Route::get('/', 'login')->name('login');
-    Route::post('/', 'actionlogin')->name('actionlogin');
-});
-
+Route::get('/', [LoginController::class,'login'] )->name('login');
+Route::post('/', [LoginController::class,'actionlogin'] )->name('actionlogin');
 Route::get('actionlogout', [LoginController::class, 'actionlogout'])->name('actionlogout');
-Route::get('actionAdminUpdate', [LoginController::class, 'actionAdminUpdate'])->name('actionAdminUpdate');
+Route::post('actionAdminUpdate', [LoginController::class, 'actionAdminUpdate'])->name('actionAdminUpdate');
+
+// Group routes under 'auth' middleware
+Route::middleware(['auth'])->group(function () {
+
+//route Dashboard
+Route::get('/dashboard', [Dashboard::class,'index'] )->name('index');
+Route::get('/profile', [Dashboard::class,'profile'] )->name('profile');
 
 //route jabatan
 Route::get('/jabatans', [JabatanController::class,'index'])->name('jabatan.read');
@@ -63,3 +67,4 @@ Route::get('/gajis', [GajiController::class, 'index'])->name('gaji.index');
 // Route::put('/gajis/{id}', [GajiController::class, 'update'])->name('gaji.update');
 // Route::delete('/gajis/{id}', [GajiController::class, 'destroy'])->name('gaji.destroy');
 
+});
