@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Absensi;
 use App\Models\Cuti;
 use App\Models\Karyawan;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class CutiController extends Controller
@@ -32,7 +34,8 @@ class CutiController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
+        $currentTime = Carbon::now('Asia/Jakarta');
+        $request->validate([
             'karyawan_id' => 'required|exists:karyawans,id',
             'tanggal_mulai' => 'required|date',
             'tanggal_berakhir' => 'required|date|after_or_equal:tanggal_mulai',
@@ -40,9 +43,23 @@ class CutiController extends Controller
             'jenis_cuti' => 'required|string|max:255',
         ]);
 
-        Cuti::create($request->all());
-        return redirect()->route('cuti.read')->with('success','data berhasil ditambahkan');
+        $tanggalMulai = Carbon::parse($request->tanggal_mulai);
+        $tanggalBerakhir = Carbon::parse($request->tanggal_berakhir);
 
+        // Loop through each date between tanggal_mulai and tanggal_berakhir
+        for ($date = $tanggalMulai; $date->lte($tanggalBerakhir); $date->addDay()) {
+            $absensi = [
+                'karyawan_id' => $request->karyawan_id,
+                'status_absen' => 'cuti',
+                'keterangan' => $request->keterangan,
+                'tanggal_absensi' => $date->toDateString(),
+                'time' => $currentTime->toTimeString(),
+            ];
+            Absensi::create($absensi);
+        }
+
+        Cuti::create($request->all());
+        return redirect()->route('cuti.read')->with('success','Data berhasil ditambahkan');
     }
 
     /**
