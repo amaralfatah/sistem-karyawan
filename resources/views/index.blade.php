@@ -49,8 +49,17 @@ active
                 <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
                     <i class="fa fa-chart-line fa-3x text-primary"></i>
                     <div class="ms-3">
-                        <p class="mb-2">Total Semua Karyawan</p>
+                        <p class="mb-2">Total Data Semua Karyawan</p>
                         <h6 class="mb-0">{{ $dataKaryawan }}</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-xl-3">
+                <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                    <i class="fa fa-chart-line fa-3x text-primary"></i>
+                    <div class="ms-3">
+                        <p class="mb-2">Rekap Total Cuti Hari Ini</p>
+                        <h6 class="mb-0">{{ $totalCutiHariIni }}</h6>
                     </div>
                 </div>
             </div>
@@ -65,19 +74,10 @@ active
             </div>
             <div class="col-sm-6 col-xl-3">
                 <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-                    <i class="fa fa-chart-area fa-3x text-primary"></i>
-                    <div class="ms-3">
-                        <p class="mb-2">Pengeluaran Gaji Bulan Ini</p>
-                        <h6 class="mb-0">$1234</h6>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-xl-3">
-                <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
                     <i class="fa fa-chart-pie fa-3x text-primary"></i>
                     <div class="ms-3">
-                        <p class="mb-2">Pengeluaran Gaji Tahunan Ini</p>
-                        <h6 class="mb-0">$1234</h6>
+                        <p class="mb-2">Pengeluaran Gaji Seluruh Karyawan</p>
+                        <h6 class="mb-0">{{ $totalGaji }}</h6>
                     </div>
                 </div>
             </div>
