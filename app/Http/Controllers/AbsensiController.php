@@ -12,7 +12,7 @@ class AbsensiController extends Controller
 
     public function index()
     {
-        $today = Carbon::today();
+        $today = Carbon::today('Asia/Jakarta');
 
         $karyawanBelumAbsen = Karyawan::whereDoesntHave('absensis', function ($query) use ($today) {
             $query->whereDate('tanggal_absensi', $today);
@@ -35,7 +35,7 @@ class AbsensiController extends Controller
         $currentTime = Carbon::now('Asia/Jakarta');
         $deadline = Carbon::today('Asia/Jakarta')->setHour(8)->setMinute(0)->setSecond(0);
 
-        // dd($currentTime->toDateString());
+        // dd($currentTime->toDateString()); 
         // dd($currentTime->toTimeString());
         // dd($deadline);
 
