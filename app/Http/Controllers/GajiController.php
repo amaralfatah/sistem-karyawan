@@ -22,7 +22,7 @@ class GajiController extends Controller
     }
 
     private function calculateTotalPotongan($gaji) {
-        return $gaji->karyawan->jabatan->potongan;
+        return $gaji->karyawan->total_kontak * $gaji->karyawan->jabatan->potongan;
     }
 
     private function calculateTotalTunjangan($gaji) {
