@@ -12,11 +12,15 @@ class GajiFactory extends Factory
 
     public function definition()
     {
+        // Buat karyawan dengan relasi ke jabatan
+        $karyawan = Karyawan::factory()->create();
+        $jabatan = $karyawan->jabatan;
+
         return [
-            'karyawan_id' => Karyawan::factory(), // Create a new Karyawan for each Gaji
+            'karyawan_id' => $karyawan->id,
             'total' => $this->faker->numberBetween(3000000, 7000000),
-            'potongan' => $this->faker->numberBetween(100000, 1000000),
-            'tunjangan' => $this->faker->numberBetween(500000, 2000000),
+            'potongan' => $jabatan->potongan,
+            'tunjangan' => $jabatan->tunjangan,
         ];
     }
 }

@@ -11,7 +11,7 @@ class JabatanFactory extends Factory
 
     public function definition()
     {
-        $faker = \Faker\Factory::create('id_ID'); 
+        $faker = \Faker\Factory::create('id_ID');
 
         $jabatanIT = [
             'Software Engineer',
@@ -37,9 +37,9 @@ class JabatanFactory extends Factory
             'jam_mulai_kerja' => $faker->dateTimeBetween('08:00:00', '10:00:00')->format('H:i:s'),
             'jam_selesai_kerja' => $faker->dateTimeBetween('12:00:00', '16:00:00')->format('H:i:s'),
             'note_pekerjaan' => $faker->sentence(),
-            'gaji_pokok' => $faker->numberBetween(3, 7) * 1000000,
-            'tunjangan' => $faker->numberBetween(5, 20) * 100000,
-            'potongan' => $faker->numberBetween(1, 10) * 100000,
+            'gaji_pokok' => $faker->numberBetween(3000000, 7000000),
+            'tunjangan' => $faker->numberBetween(500000, 2000000),
+            'potongan' => $faker->numberBetween(100000, 1000000),
         ];
     }
 }

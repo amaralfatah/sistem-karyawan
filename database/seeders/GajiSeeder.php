@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\Gaji;
 
 class GajiSeeder extends Seeder
 {
@@ -11,6 +12,6 @@ class GajiSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\Gaji::factory()->count(50)->create();
+        Gaji::factory()->count(50)->create();
     }
 }

@@ -9,20 +9,20 @@ class GajiController extends Controller
 {
     public function index()
     {
-        $gajis = Gaji::with('karyawan.jabatan')->get();
-        
+        $gajis = Gaji::with(['karyawan.jabatan', 'karyawan.absensis'])->get();
+
         $gajis = $gajis->map(function ($gaji) {
             $gaji->total_potongan = $this->calculateTotalPotongan($gaji);
             $gaji->total_tunjangan = $this->calculateTotalTunjangan($gaji);
             $gaji->total_gaji = $this->calculateTotalGaji($gaji);
             return $gaji;
         });
-        
+
         return view('gaji.index', compact('gajis'));
     }
 
     private function calculateTotalPotongan($gaji) {
-        return $gaji->karyawan->absensis->where('status_absen', 'alpha')->count() * $gaji->karyawan->jabatan->potongan;
+        return $gaji->karyawan->jabatan->potongan;
     }
 
     private function calculateTotalTunjangan($gaji) {

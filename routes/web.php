@@ -60,11 +60,5 @@ Route::get('/absensi/absensiAlpha', [AbsensiController::class, 'getAlpha'])->nam
 
 // route gaji
 Route::get('/gajis', [GajiController::class, 'index'])->name('gaji.index');
-// Route::get('/gajis/create', [GajiController::class, 'create'])->name('gaji.create');
-// Route::post('/gajis', [GajiController::class, 'store'])->name('gaji.store');
-// Route::get('/gajis/{id}', [GajiController::class, 'show'])->name('gaji.show');
-// Route::get('/gajis/{id}/edit', [GajiController::class, 'edit'])->name('gaji.edit');
-// Route::put('/gajis/{id}', [GajiController::class, 'update'])->name('gaji.update');
-// Route::delete('/gajis/{id}', [GajiController::class, 'destroy'])->name('gaji.destroy');
 
 });
