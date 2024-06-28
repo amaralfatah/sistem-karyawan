@@ -32,7 +32,7 @@
                             <td>{{ $gaji->id }}</td>
                             <td>{{ $gaji->karyawan->name }}</td>
                             <td>{{ $gaji->karyawan->jabatan->gaji_pokok }}</td>
-                            <td>{{ $gaji->total_potongan }}</td>
+                            <td>{{ $gaji->potongan }}</td>
                             <td>{{ $gaji->total_tunjangan }}</td>
                             <td>{{ $gaji->total_gaji }}</td>
                         </tr>

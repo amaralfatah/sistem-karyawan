@@ -14,9 +14,9 @@ class GajiFactory extends Factory
     {
         return [
             'karyawan_id' => Karyawan::factory(), // Create a new Karyawan for each Gaji
-            'total' => $this->faker->numberBetween(3000000, 7000000),
-            'potongan' => $this->faker->numberBetween(100000, 1000000),
-            'tunjangan' => $this->faker->numberBetween(500000, 2000000),
+            'total' => $this->faker->numberBetween(3, 7)*1000000,
+            'potongan' => $this->faker->numberBetween(1, 3)*100000,
+            'tunjangan' => $this->faker->numberBetween(5, 2)*1000000,
         ];
     }
 }
